@@ -1,0 +1,43 @@
+<p>Know of a pet needing a home?</p>
+{{ newpet | json }}
+
+<p *ngIf = "err" style="color: red">This pet name is already taken!</p>
+
+<form>
+    <p>Pet Name:</p>
+    <div *ngIf = "name.invalid">
+        <div style="color: red" *ngIf="name.errors.required">
+            Name is required.
+        </div>
+        <div style="color: red" *ngIf="name.errors.minlength">
+            Name must be at least 4 characters long.
+        </div>
+    </div>
+    <input name="name" type="text" [(ngModel)] = "newpet.name" #name ="ngModel" required minlength="3">
+    <p>Pet Type:</p>
+    <div *ngIf = "type.invalid">
+            <div style="color: red" *ngIf="type.errors.required">
+                Type is required.
+            </div>
+            <div style="color: red" *ngIf="type.errors.minlength">
+                Type must be at least 4 characters long.
+            </div>
+    </div>
+    <input name="type" type="text" [(ngModel)] = "newpet.type" #type ="ngModel" required minlength="3">
+    <p>Pet Description:</p>
+    <div *ngIf = "desc.invalid">
+            <div style="color: red" *ngIf="desc.errors.required">
+                Description is required.
+            </div>
+            <div style="color: red" *ngIf="desc.errors.minlength">
+                Description must be at least 4 characters long.
+            </div>
+    </div>
+    <input name="desc" type="text" [(ngModel)] = "newpet.desc" #desc ="ngModel" required minlength="3">
+    <p>Skills:</p>
+    <p>Skill 1: <input name="skill1" type="text" [(ngModel)] = "newpet.skills[0]"></p>
+    <p>Skill 2: <input name="skill2" type="text" [(ngModel)] = "newpet.skills[1]"></p>
+    <p>Skill 3: <input name="skill3" type="text" [(ngModel)] = "newpet.skills[2]"></p>
+    <button [routerLink] ="['/pets']">Cancel</button> <button (click) = "addnewpet()">Submit</button>
+</form>
+
